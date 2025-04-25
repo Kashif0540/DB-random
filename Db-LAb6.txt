@@ -1,0 +1,149 @@
+create database lab6;
+show databases;
+
+create table Employee(
+emp_id int(7) primary key,
+first_name varchar(30) not null,
+last_name varchar(30) not null,
+emp_email varchar(30) unique key
+);
+create table UserAccount(
+user_id int(7) primary key,
+username varchar(30),
+user_email varchar(30) unique key
+);
+create table Customer(
+customer_id int(7) primary key,
+cust_name varchar(30),
+cont_info varchar(30),
+DateofBirth date,
+Preferences varchar(30),
+LoyaltyPoints int default(0)
+);
+ create table Orders(
+order_id int(7) primary key,
+order_date date,
+foreign key (customer_id) references cutomer(customer_id)
+);
+ create table Trip( 
+trip_id int(7) primary key,
+destinationid int(20),
+DepartureDate DATE,
+ReturnDate DATE,
+Price DECIMAL(10, 2),
+MaxCapacity INT(20),
+PackageID INT(20)
+);
+create table Booking (
+BookingID int(7) primary key,
+BookingName VARCHAR(20),
+BookingDate DATE,
+RoomNumber INT(19),
+Status VARCHAR(30),
+foreign key (customer_id) references cutomer(customer_id)
+);
+
+Describe Employee;
+Describe UserAccount;
+Describe Customer;
+Describe  Orders;
+Describe  Trip;
+Describe Booking;
+
+
+ Drop table Employee;
+ Drop table UserAccount;
+ Drop table  Customer;
+ Drop table Orders;
+ Drop table Trip;
+ Drop table Booking;
+
+Drop database lab60540;
+
+create table Customer(
+customer_id int(7) primary key,
+cust_name varchar(30),
+cont_info varchar(30),
+DateofBirth date,
+Preferences varchar(30),
+LoyaltyPoints int default(0)
+);
+ create table Trip( 
+trip_id int(7) primary key,
+destinationid int(20),
+DepartureDate DATE,
+ReturnDate DATE,
+Price DECIMAL(10, 2),
+MaxCapacity INT(20),
+PackageID INT(20)
+);
+create table Booking (
+BookingID int(7) primary key,
+BookingName VARCHAR(20),
+BookingDate DATE,
+RoomNumber INT(19),
+Status VARCHAR(30),
+foreign key (customer_id) references cutomer(customer_id)
+);
+
+Alter table Customer
+Add Customer_Email varchar(30);
+
+Alter table Trip
+Modify Price DECIMAL(10, 2);
+
+Alter table Customer
+Drop column Prefernces;
+
+INSERT INTO Customer (CustomerID, Name, Phone, BirthDate, LoyaltyPoints, Balance)
+VALUES(
+(1, 'Alice Johnson', '123-456-7890', '1985-03-22', NULL, 1200),
+(2, 'Bob Smith', '234-567-8901', '1990-07-15', NULL, 950),
+(3, 'Charlie Brown', '345-678-9012', '1988-02-10', NULL, 500),
+(4, 'David Williams', '456-789-0123', '1992-11-30', NULL, 300),
+(5, 'Eve Davis', '567-890-1234', '1980-09-25', NULL, 1500)
+);
+
+INSERT INTO Booking (BookingID, Description, BookingDate, TripID, Status, CustomerID)
+VALUES(
+(1, 'Booking for Alice', '2025-04-01', 101, 'confirmed', 1),
+(2, 'Booking for Bob', '2025-04-05', 102, 'pending', 2),
+(3, 'Booking for Charlie', '2025-04-10', 103, 'canceled', 3),
+(4, 'Booking for David', '2025-04-15', 104, 'confirmed', 4),
+(5, 'Booking for Eve', '2025-04-20', 105, 'pending', 5)
+);
+
+INSERT INTO Trip (TripID, Destination, Price, DepartureDate, ReturnDate, MaxCapacity, PackageID)
+VALUES(
+(1, 'Paris', 1500.00, '2025-05-01', '2025-05-10', 30, 101),
+(2, 'Tokyo', 800.00, '2025-06-01', '2025-06-07', 20, 102),
+(3, 'New York', 1200.00, '2025-07-01', '2025-07-10', 25, 103),
+(4, 'London', 950.00, '2025-08-01', '2025-08-05', 20, 104),
+(5, 'Rome', 400.00, '2025-09-01', '2025-09-07', 15, 105)
+);
+
+Delete From Booking Where BookingID=5;
+Delete From Trip Where Price<1000;
+
+UPDATE Customer
+SET LoyaltyPoints = 500 
+WHERE CustomerID=10;
+
+UPDATE Booking
+SET Status = 'confirmed'
+WHERE CustomerID=3;
+
+SELECT * FROM Trips
+WHERE Price BETWEEN 500 AND 1500;
+
+SELECT * FROM Customers
+WHERE LoyaltyPoints >1000;
+
+SELECT * FROM Booking
+WHERE Status='Booked' || status='confirmed';
+
+SELECT * FROM Customers
+WHERE BirthDate BETWEEN '1980-01-01' AND '2000-12-31';
+
+
+
